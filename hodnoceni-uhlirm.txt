@@ -1,0 +1,46 @@
+Ceníme práci na projektu! 🏆 Prohlédli jsme si kód a máme k němu následující poznámky:
+
+1. Pojmenování identifikátorů -
+
+2. Dodržení principů SRP a SoC
+- Třída Evidence se zdá být zodpovědná jak za interakci s uživatelem, tak za logiku správy pojištěných, což porušuje principy SRP a SoC.
+
+3. Vhodný výběr datových typů – v pořádku. Proměnná telefon je typu String, co je vhodné např. pro mezinárodní formát tel. čísla.
+
+4. Formátování kódu
+- Před odevzdáním na GitHub je vhodné využít funkci automatického formátování ve vašem vývojářském prostředí. Tím by se vám pravděpodobně break; ve swich dostal na vlastní řádek a tím víc odpovídal standardnímu formátování.
+-  for (Pojisteny p: list) System.out.println(p.toString()); přepsat na
+for (Pojisteny p: list) {
+	System.out.println(p.toString());
+}
+- nekonzistence při formátování 2 podobně vypadajících override metod:
+     @Override
+    public boolean equals(Object obj) {return obj.equals(jmeno+prijmeni);}
+
+    @Override
+    public String toString() {
+        return String.format("%-15s%-15s%-4d%s",jmeno, prijmeni, vek, telefon);
+    }
+
+5. Duplicitní kód a nekonečné cykly – nevidím nekonečné cykly ani duplicitní kód.
+6. Validace vstupních dat – v pořádku.
+
+7. Logičnost a složitost
+- Třída Hlavni.java by mohla být eliminována. Začínat by se mohlo přímo ve třídě Evidence.java.
+- Následující řádek by by bylo vhodné přepsat do 4 řádků pro větší čitelnost a možnosti pozdějších úprav.        System.out.println("\nVyberte si akci:\n1 - Přidat nového pojištěného\n2 - Vypsat všechny pojištěné\n3 - Vyhledat pojištěného\n4 – Konec");
+- Soubor.java rádek 21 výjimka je zachycena, ale neobsloužena. Možná dát uživateli vědět, co se stalo, co selhalo. To samé řádek 30.         catch (Exception e){}
+
+8. Komentáře
+- Přítomné na kritických místech, možná by bylo vhodné je doplnit i před některé metody (na stručný popis jejich funkcionality)
+- Komentáře doporučuji dávat na zvláštní řádek, např.:
+//seznam vytvoří třída Soubor, ať už soubor existuje a je neprázdný nebo ne
+pojisteni = soubor.nactiPojistene();
+místo
+pojisteni = soubor.nactiPojistene();//seznam vytvoří třída Soubor, ať už soubor existuje a je neprázdný nebo ne
+
+9. Celkové hodnocení
+- Kód se zdá být na správné cestě pro úroveň junior vývojáře, ale je potřeba zlepšení v oblasti návrhu tříd a oddělení zodpovědností.
+- Důležitý je přidat víc komentářů a možná přepracovat kód s ohledem na SRP a SoC.
+- Oceňuji možnost načítání a ukládání dat z a do souboru.
+
+Doporučujeme případné výtky v kódu opravit, abyste jej mohli pak prezentovat budoucímu zaměstnavateli v co nejlepší kvalitě. Pokud byste potřebovali s čímkoli pomoci, naplánujte si s námi konzultaci, rádi vám poradíme!
